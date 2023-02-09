@@ -35,11 +35,24 @@
 /**
  * End Helper Functions
  * Begin Main Functions
- * 
-*/
+ *
+ */
 
 // build the nav
+function loadNavigation() {
+    const documentFragment = document.createDocumentFragment();
+    const sections = document.querySelectorAll('[data-nav]');
 
+    for (const section of sections) {
+        const listItem = document.createElement('li');
+        listItem.textContent = section.dataset.nav;
+        listItem.className = 'menu__link';
+        documentFragment.appendChild(listItem);
+    }
+
+    let navbar = document.getElementById('navbar__list');
+    navbar.appendChild(documentFragment);
+}
 
 // Add class 'active' to section when near top of viewport
 
@@ -50,10 +63,11 @@
 /**
  * End Main Functions
  * Begin Events
- * 
-*/
+ *
+ */
 
 // Build menu 
+document.addEventListener('DOMContentLoaded', loadNavigation);
 
 // Scroll to section on link click
 
