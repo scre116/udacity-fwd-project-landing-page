@@ -47,6 +47,8 @@ function loadNavigation() {
         const listItem = document.createElement('li');
         listItem.textContent = section.dataset.nav;
         listItem.className = 'menu__link';
+        listItem.dataset.target = section.id
+
         documentFragment.appendChild(listItem);
     }
 
