@@ -46,7 +46,7 @@ function loadNavigation() {
     for (const section of sections) {
         const listItem = document.createElement('li');
         listItem.textContent = section.dataset.nav;
-        listItem.className = 'menu__link';
+        listItem.classList.add('menu__link');
         listItem.dataset.target = section.id
 
         documentFragment.appendChild(listItem);
