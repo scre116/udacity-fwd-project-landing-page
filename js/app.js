@@ -28,12 +28,12 @@ const sections = document.querySelectorAll('[data-nav]');
 function buildMenu() {
     const documentFragment = document.createDocumentFragment();
     for (const section of sections) {
-        const listItem = document.createElement('li');
-        listItem.textContent = section.dataset.nav;
-        listItem.classList.add('menu__link');
-        listItem.dataset.targetId = section.id
+        const menuItem = document.createElement('li');
+        menuItem.textContent = section.dataset.nav;
+        menuItem.classList.add('menu__link');
+        menuItem.dataset.targetSectionId = section.id
 
-        documentFragment.appendChild(listItem);
+        documentFragment.appendChild(menuItem);
     }
 
     const navbar = document.getElementById('navbar__list');
