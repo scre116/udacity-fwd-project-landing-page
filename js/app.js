@@ -43,7 +43,6 @@ function buildMenu() {
 // Add class 'active' to section when near top of viewport
 function activateViewedSection() {
 
-
     function sectionIsVisible(section) {
         const top = section.getBoundingClientRect().top;
         const bottom = section.getBoundingClientRect().bottom;
@@ -76,6 +75,7 @@ function activateViewedSection() {
 
     const activeSection = getFirstVisibleSection();
 
+    // activate the section
     for (const section of sections) {
         if (section === activeSection) {
             section.classList.add('active');
