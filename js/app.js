@@ -74,13 +74,23 @@ function activateViewedSection() {
         return null;
     }
 
-    const firstVisibleSection = getFirstVisibleSection();
+    const activeSection = getFirstVisibleSection();
 
     for (const section of sections) {
-        if (section === firstVisibleSection) {
+        if (section === activeSection) {
             section.classList.add('active');
         } else {
             section.classList.remove('active');
+        }
+    }
+
+    // activate the menu item for the active section
+    const menuItems = document.querySelectorAll('.menu__link');
+    for (const menuItem of menuItems) {
+        if (menuItem.dataset.targetSectionId === activeSection?.id) {
+            menuItem.classList.add('active');
+        } else {
+            menuItem.classList.remove('active');
         }
     }
 }
@@ -89,8 +99,8 @@ function activateViewedSection() {
 function scrollToSection(event) {
     event.preventDefault();
     const menuItem = event.target;
-    if (menuItem.dataset.targetId) {
-        const section = document.getElementById(menuItem.dataset.targetId);
+    if (menuItem.dataset.targetSectionId) {
+        const section = document.getElementById(menuItem.dataset.targetSectionId);
         section.scrollIntoView({behavior: 'smooth'});
     }
 }
@@ -106,6 +116,7 @@ document.addEventListener('DOMContentLoaded', buildMenu);
 document.addEventListener('scroll', activateViewedSection);
 document.addEventListener('resize', activateViewedSection);
 document.addEventListener('DOMContentLoaded', activateViewedSection);
+
 
 // Scroll to section on link click
 const menu = document.getElementById('navbar__list');
