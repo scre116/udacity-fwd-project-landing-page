@@ -1,13 +1,16 @@
 # Landing Page Project
 
-## Table of Contents
+## Description
 
-* [Instructions](#instructions)
+The starter project has some HTML and CSS styling to display static content with added interactive behavior.
 
-## Instructions
+Added functionality:
 
-The starter project has some HTML and CSS styling to display a static version of the Landing Page project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+- Dynamically build navigation menu
+- Scroll to section on click of navigation item
+- Highlight current section
+- Highlight current navigation item
 
-To get started, open `js/app.js` and start building out the app's functionality
-
-For specific, detailed instructions, look at the project instructions in the Udacity Classroom.
+The index.html contains four static sections. In the real world the HTML would be generated
+by the backend with content already inserted, or the content would be added by JavaScript from a Web API call.
+Working with the Web APIs is the topic of the next course section / next project.
