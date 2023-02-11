@@ -14,11 +14,6 @@
 */
 
 /**
- * Comments should be present at the beginning of each procedure and class.
- * Great to have comments before crucial code sections within the procedure.
-*/
-
-/**
  * Define Global Variables
  */
 
@@ -26,27 +21,17 @@
 const sections = document.querySelectorAll('[data-nav]');
 
 /**
- * End Global Variables
- * Start Helper Functions
- *
- */
-
-
-
-/**
- * End Helper Functions
- * Begin Main Functions
- *
+ * Main Functions
  */
 
 // build the nav
-function loadNavigation() {
+function buildMenu() {
     const documentFragment = document.createDocumentFragment();
     for (const section of sections) {
         const listItem = document.createElement('li');
         listItem.textContent = section.dataset.nav;
         listItem.classList.add('menu__link');
-        listItem.dataset.target = section.id
+        listItem.dataset.targetId = section.id
 
         documentFragment.appendChild(listItem);
     }
@@ -71,6 +56,7 @@ function activateViewedSection() {
         for (const section of sections) {
             // this is our relative top of the screen. It is at 25% from the real top.
             const viewPortTop = window.visualViewport.height / 4;
+
             const top = section.getBoundingClientRect().top;
             const bottom = section.getBoundingClientRect().bottom;
 
@@ -79,9 +65,10 @@ function activateViewedSection() {
             }
         }
 
-        // no section is (sufficiently) visible. Return the first section, if it is visible at all
-        if (sectionIsVisible(sections.item(0))) {
-            return sections.item(0);
+        // no section is (sufficiently) visible. Return the first section, if it is even partially visible
+        const firstSection = sections.item(0);
+        if (firstSection && sectionIsVisible(firstSection)) {
+            return firstSection;
         }
 
         return null;
@@ -98,25 +85,30 @@ function activateViewedSection() {
     }
 }
 
-// Scroll to anchor ID using scrollTO event
-
+// scroll to section if a menu item is clicked
+function scrollToSection(event) {
+    event.preventDefault();
+    const menuItem = event.target;
+    if (menuItem.dataset.targetId) {
+        const section = document.getElementById(menuItem.dataset.targetId);
+        section.scrollIntoView({behavior: 'smooth'});
+    }
+}
 
 /**
- * End Main Functions
- * Begin Events
- *
+ * Events
  */
 
 // Build menu 
-document.addEventListener('DOMContentLoaded', loadNavigation);
+document.addEventListener('DOMContentLoaded', buildMenu);
 
 // Set sections as active
 document.addEventListener('scroll', activateViewedSection);
 document.addEventListener('resize', activateViewedSection);
 document.addEventListener('DOMContentLoaded', activateViewedSection);
 
-
 // Scroll to section on link click
-
+const menu = document.getElementById('navbar__list');
+menu.addEventListener('click', scrollToSection)
 
 
